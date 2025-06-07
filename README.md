@@ -16,3 +16,13 @@ Luckily, ansible is a python software, so you can leverage conda to get a suitab
 
 - See https://docs.ansible.com/ansible/latest/getting_started/get_started_ansible.html
 - Inside `ansible` conda env: `pip install ansible`
+
+The required minimum ansible version is `2.18.0`.
+
+### Requirements
+
+To install ansible requirements, simply run the following.
+
+```shell
+ansible-galaxy install -r requirements.yml
+```
