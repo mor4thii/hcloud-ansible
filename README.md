@@ -7,7 +7,7 @@ Luckily, ansible is a python software, so you can leverage conda to get a suitab
 
 ### Conda
 
-- Follow steps at https://github.com/conda-forge/miniforge
+- Follow steps at [miniforge (github)](https://github.com/conda-forge/miniforge)
 - See [reference zsh dotfile](https://github.com/mor4thii/dotfiles/blob/main/zsh/.zshrc) for adapting .zshrc 
 - `conda create -n ansible python=3.13`
 - `conda activate ansible`
