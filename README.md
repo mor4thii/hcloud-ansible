@@ -44,10 +44,22 @@ To install ansible requirements, simply run the following.
 ansible-galaxy install -r requirements.yml
 ```
 
+## Prepare Hetzner Cloud
+
+After all the preparations have been done, we can prepare the Hetzner Cloud itself.
+
+### SSH key
+
+- Go to the [Hetzner Cloud Project Overview](https://console.hetzner.cloud/projects/)
+- Open your project
+- Go to `Security` -> `SSH keys` and `Add SSH key`
+- Add your SSH key and save it as `default`
+- Make your `default` SSH key your `Default` key
+
 ### API Token
 
-Get a read/write API token for your Hetzner Cloud, see [official documentation](https://docs.hetzner.com/cloud/api/getting-started/generating-api-token).
-Paste the token into `files/hcloud.token` and use ansible vault to encrypt it.
+- Get a read/write API token for your Hetzner Cloud, see [official documentation](https://docs.hetzner.com/cloud/api/getting-started/generating-api-token).
+- Paste the token into `files/hcloud.token` and use ansible vault to encrypt it.
 
 ```shell
 ansible-vault encrypt files/hcloud.token
