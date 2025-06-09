@@ -1,0 +1,7 @@
+---
+- name: Configure Firewall
+  ansible.builtin.import_tasks: firewall.yml
+
+# - name: Configure Primary IP
+
+# - name: Create Server
