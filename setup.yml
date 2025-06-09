@@ -1,0 +1,18 @@
+---
+- name: Try it out!
+  hosts: localhost
+  gather_facts: false
+
+  module_defaults:
+    group/hetzner.hcloud.all:
+      api_token: "{{ lookup('ansible.builtin.unvault', 'hcloud.token') | string | trim }}"
+
+  tasks:
+    - name: Gather hcloud server infos
+      hetzner.hcloud.server_info:
+      register: output
+
+    - name: Print the gathered infos
+      debug:
+        var: output.hcloud_server_info
+
