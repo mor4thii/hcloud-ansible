@@ -81,6 +81,14 @@ ansible-vault encrypt files/hcloud.token
 
 Remember the password as you'll need it in a second.
 
+## Run the script
+
+To set up hcloud, run the following command, using the vault password you just created
+
+```shell
+ansible-playbook -i inventory/hcloud.yml --ask-vault-pass setup.yml
+```
+
 [1]: https://github.com/conda-forge/miniforge
 [2]: https://github.com/mor4thii/dotfiles/blob/main/zsh/.zshrc
 [3]: https://docs.ansible.com/ansible/latest/getting_started/get_started_ansible.html
