@@ -5,4 +5,5 @@
 - name: Configure Primary IP
   ansible.builtin.import_tasks: primary_ip.yml
 
-# - name: Create Server
+- name: Create Server
+  ansible.builtin.import_tasks: create_server.yml
