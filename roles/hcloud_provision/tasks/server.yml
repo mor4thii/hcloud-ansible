@@ -1,11 +1,9 @@
 ---
-# Create or ensure server present; attach firewall and the previously created Primary IPs.
 - name: Create Hetzner server with attached firewall + IPs
   hetzner.hcloud.server:
     name: "{{ hcloud_server_name }}"
     server_type: "{{ hcloud_server_type }}"
     image: "{{ hcloud_image }}"
-    # Use either location or datacenter. Prefer location for flexibility.
     location: "{{ hcloud_location }}"
     ssh_keys: "{{ hcloud_ssh_keys }}"
     firewalls:
@@ -22,7 +20,6 @@
     port: 22
     timeout: 300
 
-# Expose this server as a temp inventory host so subsequent plays can target it
 - name: Add the new server to in-memory inventory
   ansible.builtin.add_host:
     name: "{{ hcloud_server.server.name }}"
