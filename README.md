@@ -81,10 +81,18 @@ Remember the password as you'll need it in a second.
 
 ## Provision the server(s)
 
+First, make sure to have added your SSH key to ssh-agent for the current terminal session.
+Otherwise, you will get an error as soon as the `server_base` playbook starts.
+
+```shell
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/<your_key>
+```
+
 To set up hcloud, run the following command, using the vault password you just created
 
 ```shell
-ansible-playbook provision.yml --ask-vault-pass
+ansible-playbook provision.yml --ask-vault-pass -e server_admin_user=admin
 ```
 
 ## Teardown the server(s)

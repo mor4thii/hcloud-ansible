@@ -14,6 +14,12 @@
 - name: Include Fail2Ban setup
   import_tasks: fail2ban.yml
 
+- name: Include hardening
+  import_tasks: hardening.yml
+
+- name: Include QoL stuff
+  import_tasks: qol.yml
+
 - name: Check if reboot is required
   stat:
     path: /var/run/reboot-required

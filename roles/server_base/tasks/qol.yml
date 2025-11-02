@@ -1,0 +1,40 @@
+---
+- name: Customize login banner (motd)
+  copy:
+    dest: /etc/motd
+    content: |
+
+      Welcome to {{ ansible_hostname }} (managed by Ansible)
+      Unauthorized access is prohibited.
+
+    mode: "0644"
+
+- name: Set timezone to Europe/Berlin
+  timezone:
+    name: Europe/Berlin
+
+- name: Ensure en_US.UTF-8 locale is generated
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Create admin user
+  user:
+    name: "{{ server_admin_user }}"
+    groups: "{{ server_admin_groups }}"
+    shell: /bin/bash
+    create_home: yes
+    state: present
+
+- name: Read root's authorized_keys from remote
+  slurp:
+    src: /root/.ssh/authorized_keys
+  register: root_auth_keys
+  become: true
+
+- name: Copy authorized SSH keys from root to admin user
+  authorized_key:
+    user: "{{ server_admin_user }}"
+    key: "{{ root_auth_keys['content'] | b64decode }}"
+    state: present
+

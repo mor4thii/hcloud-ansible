@@ -1,0 +1,36 @@
+---
+- name: Ensure sudo is installed
+  apt:
+    name: sudo
+    state: present
+
+- name: Ensure sudo does not require TTY
+  lineinfile:
+    path: /etc/sudoers
+    regexp: '^#?Defaults\s+requiretty'
+    state: absent
+
+- name: Ensure logrotate is installed
+  apt:
+    name: logrotate
+    state: present
+
+- name: Ensure chrony (NTP) is installed and enabled
+  apt:
+    name: chrony
+    state: present
+  notify: Restart chrony
+
+- name: Install unattended-upgrades
+  apt:
+    name: unattended-upgrades
+    state: present
+
+- name: Enable unattended upgrades
+  copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+    mode: '0644'
+

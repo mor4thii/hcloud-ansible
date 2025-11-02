@@ -10,3 +10,6 @@ ssh_port: 22
 ssh_permit_root_login: "prohibit-password"
 ssh_password_auth: "no"
 
+server_admin_user: admin
+server_admin_groups: sudo
+
