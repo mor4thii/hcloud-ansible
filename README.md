@@ -72,12 +72,10 @@ After all the preparations have been done, we can prepare the Hetzner Cloud itse
 
 ### API Token
 
+- Create an ansible vault
+  - `ansible-vault create group_vars/all/vault.yml`
 - Get a read/write API token for your Hetzner Cloud, see [official documentation][6].
-- Paste the token into `group_vars/all/vault.yml` and use ansible vault to encrypt it.
-
-```shell
-ansible-vault encrypt group_vars/all/vault.yml
-```
+- Add the token in the form `hcloud_api_token: "YOUR_TOKEN"` to the ansible vault
 
 Remember the password as you'll need it in a second.
 
