@@ -1,0 +1,25 @@
+---
+- name: Teardown Hetzner Cloud infrastructure
+  hosts: localhost
+  gather_facts: false
+
+  module_defaults:
+    group/hetzner.hcloud.all:
+      api_token: "{{ hcloud_api_token }}"
+
+  vars:
+    artifacts_dir: artifacts
+
+  tasks:
+    - name: Collect server artifact files
+      ansible.builtin.find:
+        paths: "{{ artifacts_dir }}"
+        patterns: "*.json"
+      register: artifact_files
+
+    - name: Read each artifact file
+      ansible.builtin.include_tasks: teardown_one.yml
+      loop: "{{ artifact_files.files }}"
+      loop_control:
+        loop_var: artifact_file
+

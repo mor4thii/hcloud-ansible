@@ -1,0 +1,27 @@
+---
+- name: Load server metadata
+  ansible.builtin.slurp:
+    src: "{{ artifact_file.path }}"
+  register: server_json
+
+- name: Parse JSON content
+  ansible.builtin.set_fact:
+    server_info: "{{ server_json.content | b64decode | from_json }}"
+
+- name: Show server being destroyed
+  ansible.builtin.debug:
+    msg:
+      - "Destroying server: {{ server_info.server.name }}"
+      - "ID: {{ server_info.server.id }}"
+      - "IPv4: {{ server_info.server.server.ipv4_address | default('n/a') }}"
+
+- name: Delete Hetzner server
+  hetzner.hcloud.server:
+    name: "{{ server_info.server.name }}"
+    state: absent
+
+- name: Remove local artifact
+  ansible.builtin.file:
+    path: "{{ artifact_file.path }}"
+    state: absent
+

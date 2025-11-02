@@ -79,12 +79,20 @@ After all the preparations have been done, we can prepare the Hetzner Cloud itse
 
 Remember the password as you'll need it in a second.
 
-## Run the script
+## Provision the server(s)
 
 To set up hcloud, run the following command, using the vault password you just created
 
 ```shell
 ansible-playbook playbooks/provision.yml --ask-vault-pass
+```
+
+## Teardown the server(s)
+
+To remove the server resources from hcloud, run the following playbook
+
+```shell
+ansible-playbook playbooks/teardown.yml --ask-vault-pass
 ```
 
 [1]: https://github.com/conda-forge/miniforge
