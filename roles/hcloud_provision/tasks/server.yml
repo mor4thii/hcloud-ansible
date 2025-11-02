@@ -14,16 +14,20 @@
     state: present
   register: hcloud_server
 
+- name: Debug hcloud_server
+  ansible.builtin.debug:
+    var: hcloud_server
+
 - name: Wait for SSH on new server (IPv4 preferred)
   ansible.builtin.wait_for:
-    host: "{{ hcloud_server.server.ipv4_address }}"
+    host: "{{ hcloud_server.hcloud_server.ipv4_address }}"
     port: 22
     timeout: 300
 
 - name: Add the new server to in-memory inventory
   ansible.builtin.add_host:
-    name: "{{ hcloud_server.server.name }}"
+    name: "{{ hcloud_server.hcloud_server.name }}"
     groups: new_servers
-    ansible_host: "{{ hcloud_server.server.ipv4_address }}"
+    ansible_host: "{{ hcloud_server.hcloud_server.ipv4_address }}"
     ansible_user: root
 

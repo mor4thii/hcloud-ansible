@@ -6,8 +6,3 @@
     rules: "{{ hcloud_firewall_rules }}"
     state: present
   register: hcloud_firewall
-
-- name: Debug firewall
-  ansible.builtin.debug:
-    var: hcloud_firewall
-

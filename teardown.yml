@@ -3,10 +3,6 @@
   hosts: localhost
   gather_facts: false
 
-  vars_files:
-    - ../group_vars/all/hetzner.yml
-    - ../group_vars/all/vault.yml
-
   module_defaults:
     group/hetzner.hcloud.all:
       api_token: "{{ hcloud_api_token }}"
