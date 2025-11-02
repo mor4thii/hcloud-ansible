@@ -1,0 +1,13 @@
+---
+- name: Ensure firewall present
+  ansible.builtin.import_tasks: firewall.yml
+
+- name: Ensure primary IPs present
+  ansible.builtin.import_tasks: primary_ips.yml
+
+- name: Ensure server present (with firewall + IPs)
+  ansible.builtin.import_tasks: server.yml
+
+- name: Persist outputs (IDs, IPs) locally
+  ansible.builtin.import_tasks: outputs.yml
+

@@ -1,0 +1,23 @@
+---
+- name: Ensure Primary IPv4 exists
+  hetzner.hcloud.primary_ip:
+    name: "{{ hcloud_primary_ipv4_name }}"
+    labels: { key: default, value: "" }
+    type: ipv4
+    datacenter: "{{ hcloud_datacenter }}"
+    auto_delete: false
+    delete_protection: true
+    state: present
+  register: hcloud_primary_ipv4
+
+- name: Ensure Primary IPv6 exists
+  hetzner.hcloud.primary_ip:
+    name: "{{ hcloud_primary_ipv6_name }}"
+    labels: { key: default, value: "" }
+    type: ipv6
+    datacenter: "{{ hcloud_datacenter }}"
+    auto_delete: false
+    delete_protection: true
+    state: present
+  register: hcloud_primary_ipv6
+

@@ -1,0 +1,3 @@
+# Hetzner API token (store with ansible-vault)
+hcloud_api_token: "REPLACE_ME"
+

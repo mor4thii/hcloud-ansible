@@ -1,0 +1,43 @@
+hcloud_server_name: sinn-server
+hcloud_server_type: cx23
+hcloud_image: ubuntu-24.04
+hcloud_location: nbg1
+hcloud_datacenter: nbg1-dc3
+
+hcloud_ssh_keys:
+  - default
+
+hcloud_labels:
+  role: "webmail"
+
+hcloud_primary_ipv4_name: ipv4
+hcloud_primary_ipv6_name: ipv6
+
+hcloud_firewall_name: default
+
+hcloud_firewall_rules:
+  - description: Allow icmp from everywhere
+    direction: in
+    protocol: icmp
+    source_ips: [ "0.0.0.0/0", "::/0" ]
+
+  - description: Allow http inbound traffic
+    direction: in
+    protocol: tcp
+    source_ips: [ "0.0.0.0/0", "::/0" ]
+    port: "80"
+
+  - description: Allow https inbound traffic
+    direction: in
+    protocol: tcp
+    source_ips: [ "0.0.0.0/0", "::/0" ]
+    port: "443"
+
+  - description: Allow ssh inbound traffic
+    direction: in
+    protocol: tcp
+    source_ips: [ "0.0.0.0/0", "::/0" ]
+    port: "22"
+
+artifacts_dir: artifacts
+

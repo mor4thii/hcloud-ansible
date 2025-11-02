@@ -55,7 +55,7 @@ The required minimum ansible version is `2.18.0`.
 To install ansible requirements, simply run the following.
 
 ```shell
-ansible-galaxy install -r requirements.yml
+ansible-galaxy collection install -r collections/requirements.yml
 ```
 
 ## Prepare Hetzner Cloud
@@ -73,10 +73,10 @@ After all the preparations have been done, we can prepare the Hetzner Cloud itse
 ### API Token
 
 - Get a read/write API token for your Hetzner Cloud, see [official documentation][6].
-- Paste the token into `files/hcloud.token` and use ansible vault to encrypt it.
+- Paste the token into `group_vars/all/vault.yml` and use ansible vault to encrypt it.
 
 ```shell
-ansible-vault encrypt files/hcloud.token
+ansible-vault encrypt group_vars/all/vault.yml
 ```
 
 Remember the password as you'll need it in a second.
@@ -86,7 +86,7 @@ Remember the password as you'll need it in a second.
 To set up hcloud, run the following command, using the vault password you just created
 
 ```shell
-ansible-playbook -i inventory/hcloud.yml --ask-vault-pass setup.yml
+ansible-playbook playbooks/provision.yml --ask-vault-pass
 ```
 
 [1]: https://github.com/conda-forge/miniforge

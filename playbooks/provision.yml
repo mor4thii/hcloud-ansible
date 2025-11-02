@@ -1,0 +1,12 @@
+---
+- name: Provision Hetzner Cloud infrastructure
+  hosts: localhost
+  gather_facts: false
+
+  module_defaults:
+    group/hetzner.hcloud.all:
+      api_token: "{{ hcloud_api_token }}"
+
+  roles:
+    - role: hcloud_provision
+

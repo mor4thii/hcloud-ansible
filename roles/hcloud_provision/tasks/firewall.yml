@@ -1,0 +1,13 @@
+---
+- name: Create/Update default firewall
+  hetzner.hcloud.firewall:
+    name: "{{ hcloud_firewall_name }}"
+    labels: { key: default, value: "" }
+    rules: "{{ hcloud_firewall_rules }}"
+    state: present
+  register: hcloud_firewall
+
+- name: Debug firewall
+  ansible.builtin.debug:
+    var: hcloud_firewall
+

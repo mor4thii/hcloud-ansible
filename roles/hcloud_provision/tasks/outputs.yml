@@ -1,0 +1,27 @@
+---
+- name: Ensure artifacts dir exists (local)
+  ansible.builtin.file:
+    path: "{{ artifacts_dir }}"
+    state: directory
+    mode: "0755"
+  delegate_to: localhost
+  run_once: true
+
+- name: Save server facts to JSON (local)
+  ansible.builtin.copy:
+    dest: "{{ artifacts_dir }}/{{ hcloud_server.server.name }}.json"
+    content: "{{ hcloud_server | to_nice_json }}"
+    mode: "0644"
+  delegate_to: localhost
+
+- name: Show important outputs
+  ansible.builtin.debug:
+    msg:
+      server_id: "{{ hcloud_server.server.id }}"
+      server_name: "{{ hcloud_server.server.name }}"
+      ipv4: "{{ hcloud_server.server.ipv4_address }}"
+      ipv6: "{{ hcloud_server.server.ipv6 }}"
+      firewall: "{{ hcloud_firewall_name }}"
+      primary_ipv4: "{{ hcloud_primary_ipv4_name }}"
+      primary_ipv6: "{{ hcloud_primary_ipv6_name }}"
+
