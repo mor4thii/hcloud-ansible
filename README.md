@@ -84,7 +84,7 @@ Remember the password as you'll need it in a second.
 To set up hcloud, run the following command, using the vault password you just created
 
 ```shell
-ansible-playbook playbooks/provision.yml --ask-vault-pass
+ansible-playbook playbooks/provision.yml -i inventories/production/hosts.yml --ask-vault-pass
 ```
 
 ## Teardown the server(s)
@@ -92,7 +92,7 @@ ansible-playbook playbooks/provision.yml --ask-vault-pass
 To remove the server resources from hcloud, run the following playbook
 
 ```shell
-ansible-playbook playbooks/teardown.yml --ask-vault-pass
+ansible-playbook playbooks/teardown.yml -i inventories/production/hosts.yml --ask-vault-pass
 ```
 
 [1]: https://github.com/conda-forge/miniforge
