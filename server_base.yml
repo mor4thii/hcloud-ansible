@@ -1,0 +1,9 @@
+---
+- name: Configure base server setup
+  hosts: sinn-server
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: server_base
+

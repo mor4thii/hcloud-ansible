@@ -1,0 +1,28 @@
+---
+- name: Ensure OpenSSH is installed
+  apt:
+    name: openssh-server
+    state: present
+
+- name: Configure SSH daemon
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+    create: no
+  loop:
+    - { regexp: '^#?Port', line: "Port {{ ssh_port }}" }
+    - { regexp: '^#?PermitRootLogin', line: "PermitRootLogin {{ ssh_permit_root_login }}" }
+    - { regexp: '^#?PasswordAuthentication', line: "PasswordAuthentication {{ ssh_password_auth }}" }
+  notify: Restart SSH
+
+- name: Ensure SSH service is enabled
+  service:
+    name: ssh
+    enabled: yes
+    state: started
+
+- name: Add SSH restart handler
+  meta: flush_handlers
+

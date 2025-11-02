@@ -24,6 +24,28 @@
     port: 22
     timeout: 300
 
+- name: Remove existing SSH host key (if any)
+  ansible.builtin.known_hosts:
+    path: "~/.ssh/known_hosts"
+    name: "{{ hcloud_server.hcloud_server.ipv4_address }}"
+    state: absent
+  delegate_to: localhost
+
+- name: Add new SSH host key to known_hosts
+  ansible.builtin.known_hosts:
+    path: "~/.ssh/known_hosts"
+    name: "{{ hcloud_server.hcloud_server.ipv4_address }}"
+    key: "{{ lookup('pipe', 'ssh-keyscan -H ' + hcloud_server.hcloud_server.ipv4_address) }}"
+  delegate_to: localhost
+
+
+- name: Add the new server to runtime inventory
+  add_host:
+    name: "{{ hcloud_server.hcloud_server.name }}"
+    groups: provisioned
+    ansible_host: "{{ hcloud_server.hcloud_server.ipv4_address }}"
+    ansible_user: root
+
 - name: Add the new server to in-memory inventory
   ansible.builtin.add_host:
     name: "{{ hcloud_server.hcloud_server.name }}"

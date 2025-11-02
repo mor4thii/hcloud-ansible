@@ -1,0 +1,12 @@
+---
+ufw_allowed_ports:
+  - 22
+  - 80
+  - 443
+
+fail2ban_jail_local_template: "jail.local.j2"
+
+ssh_port: 22
+ssh_permit_root_login: "prohibit-password"
+ssh_password_auth: "no"
+
