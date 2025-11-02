@@ -48,7 +48,7 @@ come from the [dynamic inventory plugin][4] of hcloud.
 pip install requests python-dateutil
 ```
 
-The required minimum ansible version is `2.18.0`.
+The required minimum ansible version is `2.19.0`.
 
 ### Requirements
 
