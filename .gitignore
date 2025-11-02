@@ -1,2 +1,1 @@
-files/hcloud.token
-
+group_vars/all/vault.yml
